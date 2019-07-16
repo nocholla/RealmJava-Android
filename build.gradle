@@ -1,16 +1,135 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+
+//        appProp = [
+//                compileSdk : 28,
+//                minSdk     : 16,
+//                java       : JavaVersion.VERSION_1_8,
+//                skdVersionName: '1.0.2',
+//                sdkVersionCode: 3,
+//                sdkPubVersion: '1.1.2-SNAPSHOT'
+//        ]
+
+        ver = [
+                support: '28.0.0',
+                androidGradle: '3.4.1',
+                gms:'3.0.0',
+                realm:'5.12.0',
+                okhttp: '4.0.0',
+                retrofit2: '2.6.0',
+                rx2: '2.2.10',
+                rx2Android: '2.1.1',
+                rx2Lifecycle: '2.2.2',
+                mockitoCore: '3.0.0',
+                mockitoAndroid: '2.6.1',
+                espressoCore: '3.0.2',
+                espresso3Contrib: '3.0.1',
+                espresso3Intents: '3.0.1',
+                junit4: '4.12',
+                testrunner: '1.0.2'
+        ]
+
+        dep = [
+                // Support
+                supportAnnotations: "com.android.support:support-annotations:${ver.support}",
+
+                // Gradle
+                androidGradle: "com.android.tools.build:gradle:${ver.androidGradle}",
+
+                // Google Services
+                gms: "com.google.gms:google-services:${ver.gms}",
+
+                // Realm
+                realm: "io.realm:realm-gradle-plugin:${ver.realm}",
+
+                // Retrofit
+                okhttp: "com.squareup.okhttp3:okhttp:${ver.okhttp}",
+                okhttpLogging: "com.squareup.okhttp3:logging-interceptor:${ver.okhttp}",
+                retrofit2: "com.squareup.retrofit2:retrofit:${ver.retrofit2}",
+                retrofit2Gson: "com.squareup.retrofit2:converter-gson:${ver.retrofit2}",
+                retrofitRx2: "com.squareup.retrofit2:adapter-rxjava2:${ver.retrofit2}",
+
+                // RxJava
+                rx2: "io.reactivex.rxjava2:rxjava:${ver.rx2}",
+                rx2Android: "io.reactivex.rxjava2:rxandroid:${ver.rx2Android}",
+                rx2Lifecycle: "com.trello.rxlifecycle2:rxlifecycle:${ver.rx2Lifecycle}",
+                rx2LifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${ver.rx2Lifecycle}",
+
+                // Mockito
+                mockitoCore: "org.mockito:mockito-core:${ver.mockitoCore}",
+                mockitoAndroid: "org.mockito:mockito-android:${ver.mockitoAndroid}",
+
+                //Espresso
+                espressoCore: "com.android.support.test.espresso:espresso-core:${ver.espressoCore}",
+                espresso3Contrib: "com.android.support.test.espresso:espresso-contrib:${ver.espresso3Contrib}",
+                espresso3Intents: "com.android.support.test.espresso:espresso-intents:${ver.espresso3Intents}",
+
+                // JUnit
+                junit4: "junit:junit:${ver.junit4}",
+                testrunner: "com.android.support.test:runner:${ver.testrunner}"
+        ]
+
+        // Update Version Numbers
+        supportVersion = '28.0.0'
+        supportConstraintLayoutVersion = '1.1.3'
+        gravitySnapHelperVersion = '1.3'
+        circleImageViewVersion = '2.2.0'
+        imageCropperVersion = '2.6.+'
+        imageCompressorVersion = '2.1.0'
+        roundedImageViewVersion = '2.3.0'
+        materialCalendarViewVersion = '2.0.1'
+        materialTabStripVersion = '1.1.1'
+        timberVersion = '4.7.1'
+        volleyVersion = '2.0.1'
+        gsonVersion = '2.8.5'
+        retrofit2Version = '2.6.0'
+        retrofit2AdapterRxjava2Version = '2.2.0'
+        retrofit2ConverterGsonVersion = '2.4.0'
+        okhttpVersion = '4.0.0'
+        reactivexRxjava2Version = '2.2.10'
+        reactivexRxjava2RxAndroidVersion = '2.1.1'
+        rxlifecycleVersion = '2.2.2'
+        rxlifecycleComponentsVersion = '2.2.2'
+        daggerVersion = '2.23.2'
+        picassoVersion = '2.71828'
+        glideVersion = '4.8.0'
+        butterknifeVersion = '8.8.1'
+        zingEmbeddedAndroidVersion = '3.6.0'
+        zingCoreVersion = '3.4.0'
+        firebaseCoreVersion = '16.0.7'
+        firebaseAuthVersion = '16.2.0'
+        playServicesGcmVersion = '16.1.0'
+        firebaseDatabaseVersion = '16.1.0'
+        firebaseStorageVersion = '16.1.0'
+        firebaseFirestoreVersion = '18.1.0'
+        firebaseMessagingVersion = '17.4.0'
+        firebaseIidVersion = '17.1.0'
+        firebaseJobDispatcherVersion = '0.8.5'
+        firebaseUiDatabaseVersion = '2.0.1'
+        playServicesMapsVersion = '16.1.0'
+        playServicesLocationVersion = '16.0.0'
+        multidexVersion = '1.0.3'
+        fabVersion = '1.6.4'
+        mockitoVersion: '3.0.0'
+        mockitoAndroidVersion: '2.6.1'
+    }
+
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        // Realm
+        //classpath "io.realm:realm-gradle-plugin:5.12.0"
+        classpath dep.realm
     }
 }
 
@@ -18,7 +137,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
 }
 
