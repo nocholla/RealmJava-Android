@@ -13,9 +13,9 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
-    Button add, view, update, delete;
-    EditText roll_no, name;
-    TextView text;
+    Button addRecordBtn, viewRecordBtn, updateRecordBtn, deleteRecordBtn;
+    EditText rollNoEditTxt, nameEditTxt;
+    TextView studentTxt;
     Realm realm;
 
     @Override
@@ -23,13 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        add = findViewById(R.id.add);
-        view = findViewById(R.id.view);
-        update = findViewById(R.id.update);
-        delete = findViewById(R.id.delete);
-        roll_no = findViewById(R.id.roll_no);
-        name = findViewById(R.id.name);
-        text = findViewById(R.id.text);
+        addRecordBtn = findViewById(R.id.add);
+        viewRecordBtn = findViewById(R.id.view);
+        updateRecordBtn = findViewById(R.id.update);
+        deleteRecordBtn = findViewById(R.id.delete);
+
+        rollNoEditTxt = findViewById(R.id.roll_no);
+        nameEditTxt = findViewById(R.id.name);
+        studentTxt = findViewById(R.id.text);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
@@ -37,13 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickAction(View view) {
         switch (view.getId()){
-            case R.id.add:  addRecord();
+            case R.id.add:
+                addRecord();
                 break;
-            case R.id.view: viewRecord();
+            case R.id.view:
+                viewRecord();
                 break;
-            case R.id.update:   updateRecord();
+            case R.id.update:
+                updateRecord();
                 break;
-            case R.id.delete:   deleteRecord();
+            case R.id.delete:
+                deleteRecord();
         }
     }
 
@@ -51,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         realm.beginTransaction();
 
         Student student = realm.createObject(Student.class);
-        student.setRoll_no(Integer.parseInt(roll_no.getText().toString()));
-        student.setName(name.getText().toString());
+        student.setRollNo(Integer.parseInt(rollNoEditTxt.getText().toString()));
+        student.setName(nameEditTxt.getText().toString());
 
         realm.commitTransaction();
     }
@@ -60,27 +65,27 @@ public class MainActivity extends AppCompatActivity {
     public void viewRecord(){
         RealmResults<Student> results = realm.where(Student.class).findAll();
 
-        text.setText("");
+        studentTxt.setText("");
 
         for(Student student : results){
-            text.append(student.getRoll_no() + " " + student.getName() + "\n");
+            studentTxt.append(student.getRollNo() + " " + student.getName() + "\n");
         }
     }
 
     public void updateRecord(){
-        RealmResults<Student> results = realm.where(Student.class).equalTo("roll_no", Integer.parseInt(roll_no.getText().toString())).findAll();
+        RealmResults<Student> results = realm.where(Student.class).equalTo("rollNo", Integer.parseInt(rollNoEditTxt.getText().toString())).findAll();
 
         realm.beginTransaction();
 
         for(Student student : results){
-            student.setName(name.getText().toString());
+            student.setName(nameEditTxt.getText().toString());
         }
 
         realm.commitTransaction();
     }
 
     public void deleteRecord(){
-        RealmResults<Student> results = realm.where(Student.class).equalTo("roll_no", Integer.parseInt(roll_no.getText().toString())).findAll();
+        RealmResults<Student> results = realm.where(Student.class).equalTo("rollNo", Integer.parseInt(rollNoEditTxt.getText().toString())).findAll();
 
         realm.beginTransaction();
 
